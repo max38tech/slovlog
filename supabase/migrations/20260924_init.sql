@@ -1,8 +1,8 @@
--- Slovlog Database Schema Migration
+-- Slovlog Database Schema Migration (Shared Database: slog_ prefix)
 -- Migration: 20260924_init.sql
 
 -- 1. Create Admin Users Table
-create table if not exists public.admin_users (
+create table if not exists public.slog_admin_users (
   id uuid primary key default gen_random_uuid(),
   email text unique not null,
   role text not null check (role in ('owner', 'admin')) default 'admin',
@@ -10,12 +10,12 @@ create table if not exists public.admin_users (
 );
 
 -- Seed Owner (Shawn Shiobara)
-insert into public.admin_users (email, role)
+insert into public.slog_admin_users (email, role)
 values ('shawn.shiobara@gmail.com', 'owner')
 on conflict (email) do update set role = 'owner';
 
 -- 2. Create Posts Table
-create table if not exists public.posts (
+create table if not exists public.slog_posts (
   id uuid primary key default gen_random_uuid(),
   slug text unique not null,
   title text not null,
@@ -31,12 +31,12 @@ create table if not exists public.posts (
   updated_at timestamptz not null default now()
 );
 
-create index if not exists posts_slug_idx on public.posts (slug);
-create index if not exists posts_published_trip_date_idx on public.posts (published, trip_date desc);
-create index if not exists posts_location_idx on public.posts (location);
+create index if not exists slog_posts_slug_idx on public.slog_posts (slug);
+create index if not exists slog_posts_published_trip_date_idx on public.slog_posts (published, trip_date desc);
+create index if not exists slog_posts_location_idx on public.slog_posts (location);
 
 -- 3. Create Media Metadata Table
-create table if not exists public.media (
+create table if not exists public.slog_media (
   id uuid primary key default gen_random_uuid(),
   file_name text not null,
   file_path text not null,
@@ -48,75 +48,75 @@ create table if not exists public.media (
   created_at timestamptz not null default now()
 );
 
-create index if not exists media_created_at_idx on public.media (created_at desc);
+create index if not exists slog_media_created_at_idx on public.slog_media (created_at desc);
 
 -- 4. Enable Row Level Security (RLS)
-alter table public.admin_users enable row level security;
-alter table public.posts enable row level security;
-alter table public.media enable row level security;
+alter table public.slog_admin_users enable row level security;
+alter table public.slog_posts enable row level security;
+alter table public.slog_media enable row level security;
 
 -- Helper Function to check if the current user is an admin
-create or replace function public.is_admin()
+create or replace function public.slog_is_admin()
 returns boolean security definer as $$
 begin
   return exists (
-    select 1 from public.admin_users
+    select 1 from public.slog_admin_users
     where lower(email) = lower(auth.jwt()->>'email')
   );
 end;
 $$ language plpgsql;
 
--- 5. Policies for admin_users
-drop policy if exists "Admins can view admin list" on public.admin_users;
-create policy "Admins can view admin list" on public.admin_users
-  for select using (public.is_admin());
+-- 5. Policies for slog_admin_users
+drop policy if exists "Admins can view admin list" on public.slog_admin_users;
+create policy "Admins can view admin list" on public.slog_admin_users
+  for select using (public.slog_is_admin());
 
-drop policy if exists "Admins can insert new admins" on public.admin_users;
-create policy "Admins can insert new admins" on public.admin_users
-  for insert with check (public.is_admin());
+drop policy if exists "Admins can insert new admins" on public.slog_admin_users;
+create policy "Admins can insert new admins" on public.slog_admin_users
+  for insert with check (public.slog_is_admin());
 
-drop policy if exists "Admins can delete non-owner admins" on public.admin_users;
-create policy "Admins can delete non-owner admins" on public.admin_users
-  for delete using (public.is_admin() and role <> 'owner');
+drop policy if exists "Admins can delete non-owner admins" on public.slog_admin_users;
+create policy "Admins can delete non-owner admins" on public.slog_admin_users
+  for delete using (public.slog_is_admin() and role <> 'owner');
 
--- 6. Policies for posts
-drop policy if exists "Public can view published posts" on public.posts;
-create policy "Public can view published posts" on public.posts
+-- 6. Policies for slog_posts
+drop policy if exists "Public can view published posts" on public.slog_posts;
+create policy "Public can view published posts" on public.slog_posts
   for select using (published = true);
 
-drop policy if exists "Admins have full access to posts" on public.posts;
-create policy "Admins have full access to posts" on public.posts
-  for all using (public.is_admin());
+drop policy if exists "Admins have full access to posts" on public.slog_posts;
+create policy "Admins have full access to posts" on public.slog_posts
+  for all using (public.slog_is_admin());
 
--- 7. Policies for media
-drop policy if exists "Public can view media" on public.media;
-create policy "Public can view media" on public.media
+-- 7. Policies for slog_media
+drop policy if exists "Public can view media" on public.slog_media;
+create policy "Public can view media" on public.slog_media
   for select using (true);
 
-drop policy if exists "Admins have full access to media" on public.media;
-create policy "Admins have full access to media" on public.media
-  for all using (public.is_admin());
+drop policy if exists "Admins have full access to media" on public.slog_media;
+create policy "Admins have full access to media" on public.slog_media
+  for all using (public.slog_is_admin());
 
 -- 8. Storage bucket setup
 insert into storage.buckets (id, name, public)
-values ('slovlog-media', 'slovlog-media', true)
+values ('slog-media', 'slog-media', true)
 on conflict (id) do nothing;
 
--- Storage policies for slovlog-media
-drop policy if exists "Public Access for slovlog-media" on storage.objects;
-create policy "Public Access for slovlog-media" on storage.objects
-  for select using (bucket_id = 'slovlog-media');
+-- Storage policies for slog-media
+drop policy if exists "Public Access for slog-media" on storage.objects;
+create policy "Public Access for slog-media" on storage.objects
+  for select using (bucket_id = 'slog-media');
 
-drop policy if exists "Admin Insert for slovlog-media" on storage.objects;
-create policy "Admin Insert for slovlog-media" on storage.objects
-  for insert with check (bucket_id = 'slovlog-media' and public.is_admin());
+drop policy if exists "Admin Insert for slog-media" on storage.objects;
+create policy "Admin Insert for slog-media" on storage.objects
+  for insert with check (bucket_id = 'slog-media' and public.slog_is_admin());
 
-drop policy if exists "Admin Delete for slovlog-media" on storage.objects;
-create policy "Admin Delete for slovlog-media" on storage.objects
-  for delete using (bucket_id = 'slovlog-media' and public.is_admin());
+drop policy if exists "Admin Delete for slog-media" on storage.objects;
+create policy "Admin Delete for slog-media" on storage.objects
+  for delete using (bucket_id = 'slog-media' and public.slog_is_admin());
 
 -- 9. Sample Initial Posts (Draft & Published)
-insert into public.posts (slug, title, excerpt, content, cover_image, location, trip_date, published, featured, gallery_images)
+insert into public.slog_posts (slug, title, excerpt, content, cover_image, location, trip_date, published, featured, gallery_images)
 values 
 (
   'arriving-in-ljubljana-dragons-bridges-and-castle-views',

@@ -55,10 +55,10 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  // If initial admin, make sure they are recorded in admin_users as owner
+  // If initial admin, make sure they are recorded in slog_admin_users as owner
   if (isInitialAdmin(userEmail) && userEmail) {
     try {
-      await (supabase.from("admin_users") as any).upsert(
+      await (supabase.from("slog_admin_users") as any).upsert(
         { email: userEmail.toLowerCase(), role: "owner" },
         { onConflict: "email" }
       );

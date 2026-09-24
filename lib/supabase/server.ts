@@ -2,10 +2,25 @@ import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { Database } from "@/types/database";
 
+const FALLBACK_SUPABASE_URL = "https://placeholder-project.supabase.co";
+const FALLBACK_SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e30.placeholder";
+
+export function isSupabaseConfigured(): boolean {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  return Boolean(
+    url &&
+    key &&
+    !url.includes("placeholder") &&
+    !url.includes("your-project") &&
+    !url.includes("example.supabase.co")
+  );
+}
+
 export async function createClient() {
   const cookieStore = await cookies();
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || FALLBACK_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || FALLBACK_SUPABASE_KEY;
 
   return createServerClient<Database>(supabaseUrl, supabaseKey, {
     cookies: {
@@ -18,8 +33,7 @@ export async function createClient() {
             cookieStore.set(name, value, options)
           );
         } catch {
-          // The `setAll` method was called from a Server Component.
-          // This can be ignored if you have middleware refreshing user sessions.
+          // Can be ignored if called from a Server Component
         }
       },
     },
@@ -28,8 +42,11 @@ export async function createClient() {
 
 // Service role client for server-only administrative tasks
 export function createAdminClient() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || FALLBACK_SUPABASE_URL;
+  const serviceRoleKey =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    FALLBACK_SUPABASE_KEY;
 
   return createServerClient<Database>(supabaseUrl, serviceRoleKey, {
     cookies: {

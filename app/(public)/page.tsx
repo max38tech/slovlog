@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import { createAdminClient } from "@/lib/supabase/server";
+import { createAdminClient, isSupabaseConfigured } from "@/lib/supabase/server";
 import { PostCard } from "@/components/public/PostCard";
-import { MapPin, Calendar, Clock, ArrowRight, Compass, Mountain, Heart } from "lucide-react";
+import { MapPin, Calendar, Clock, ArrowRight, Compass, Mountain, Heart, AlertCircle } from "lucide-react";
 import { calculateReadingTime } from "@/lib/utils/public-posts";
+import { SAMPLE_POSTS } from "@/lib/data/sample-posts";
 
 export const dynamic = "force-dynamic";
 
@@ -13,20 +14,40 @@ interface HomePageProps {
 
 export default async function HomePage({ searchParams }: HomePageProps) {
   const { destination } = await searchParams;
-  const supabase = createAdminClient();
+  const configured = isSupabaseConfigured();
+  let allPosts: any[] = [];
 
-  // Query published posts
-  let query = (supabase.from("posts") as any)
-    .select("*")
-    .eq("published", true)
-    .order("trip_date", { ascending: false });
+  if (configured) {
+    try {
+      const supabase = createAdminClient();
+      let query = (supabase.from("slog_posts") as any)
+        .select("*")
+        .eq("published", true)
+        .order("trip_date", { ascending: false });
 
-  if (destination && destination !== "all") {
-    query = query.ilike("location", `%${destination}%`);
+      if (destination && destination !== "all") {
+        query = query.ilike("location", `%${destination}%`);
+      }
+
+      const { data: posts, error } = await query;
+      if (!error && posts && posts.length > 0) {
+        allPosts = posts;
+      }
+    } catch (e) {
+      console.warn("Could not fetch posts from Supabase, using sample posts:", e);
+    }
   }
 
-  const { data: posts } = await query;
-  const allPosts = posts || [];
+  // Fallback to sample posts if DB is unconfigured or empty
+  if (allPosts.length === 0) {
+    if (destination && destination !== "all") {
+      allPosts = SAMPLE_POSTS.filter((p) =>
+        p.location?.toLowerCase().includes(destination.toLowerCase())
+      );
+    } else {
+      allPosts = SAMPLE_POSTS;
+    }
+  }
 
   const featuredPost = allPosts.find((p: any) => p.featured) || allPosts[0];
   const gridPosts = featuredPost
@@ -45,6 +66,16 @@ export default async function HomePage({ searchParams }: HomePageProps) {
 
   return (
     <div className="space-y-16 pb-20">
+      {/* Unconfigured Supabase Banner (shown only if env vars are missing) */}
+      {!configured && (
+        <div className="bg-amber-500 text-slate-950 px-4 py-2 text-center text-xs font-medium flex items-center justify-center gap-2">
+          <AlertCircle className="w-4 h-4 shrink-0" />
+          <span>
+            Displaying sample stories. To connect your live Supabase database, set <strong className="font-mono">NEXT_PUBLIC_SUPABASE_URL</strong> and <strong className="font-mono">NEXT_PUBLIC_SUPABASE_ANON_KEY</strong> in Vercel.
+          </span>
+        </div>
+      )}
+
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-b from-white via-slovenia-canvas to-slovenia-canvas border-b border-slate-200/80 pt-16 pb-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10 text-center">
@@ -215,43 +246,11 @@ export default async function HomePage({ searchParams }: HomePageProps) {
             </span>
           </div>
 
-          {allPosts.length === 0 ? (
-            <div className="bg-white border border-slate-200 rounded-3xl p-16 text-center text-slate-500 space-y-4">
-              <div className="w-16 h-16 rounded-2xl bg-slovenia-canvas border border-slate-200 p-2 mx-auto flex items-center justify-center">
-                <Image
-                  src="/brand/ljubljana-dragon.png"
-                  alt="Ljubljana Dragon"
-                  width={48}
-                  height={48}
-                  className="w-12 h-12 object-contain"
-                />
-              </div>
-              <div>
-                <p className="font-universa text-xl font-bold text-slate-800">
-                  No published stories found
-                </p>
-                <p className="text-sm text-slate-500 max-w-md mx-auto mt-1">
-                  {destination
-                    ? `No stories published yet for ${destination}. Try selecting another destination.`
-                    : "Connect your Supabase database and run the migration to view initial stories, or log in to /admin to create your first post."}
-                </p>
-              </div>
-              <div className="pt-2">
-                <Link
-                  href="/admin"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slovenia-blue hover:bg-slovenia-blue-dark text-white text-xs font-semibold shadow-xs"
-                >
-                  Go to Admin CMS
-                </Link>
-              </div>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {gridPosts.map((post: any) => (
-                <PostCard key={post.id} post={post} />
-              ))}
-            </div>
-          )}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {gridPosts.map((post: any) => (
+              <PostCard key={post.id} post={post} />
+            ))}
+          </div>
         </div>
       </section>
     </div>

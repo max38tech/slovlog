@@ -35,7 +35,7 @@ export async function addAdminUserAction(formData: FormData) {
   const email = rawEmail.toLowerCase();
 
   try {
-    const { data, error } = await (supabase.from("admin_users") as any)
+    const { data, error } = await (supabase.from("slog_admin_users") as any)
       .insert({
         email,
         role: "admin",
@@ -69,7 +69,7 @@ export async function deleteAdminUserAction(id: string, targetEmail: string) {
   }
 
   try {
-    const { error } = await (supabase.from("admin_users") as any)
+    const { error } = await (supabase.from("slog_admin_users") as any)
       .delete()
       .eq("id", id);
 

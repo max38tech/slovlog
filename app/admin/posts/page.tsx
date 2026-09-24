@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 export default async function AdminPostsPage() {
   const supabase = createAdminClient();
 
-  const { data: posts, error } = await (supabase.from("posts") as any)
+  const { data: posts, error } = await (supabase.from("slog_posts") as any)
     .select("*")
     .order("trip_date", { ascending: false });
 

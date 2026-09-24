@@ -43,13 +43,13 @@ export async function verifyAdminUser(email?: string | null): Promise<{
 
   try {
     const supabase = createAdminClient();
-    const { data: adminRecord, error } = await (supabase.from("admin_users") as any)
+    const { data: adminRecord, error } = await (supabase.from("slog_admin_users") as any)
       .select("role")
       .eq("email", normalized)
       .maybeSingle();
 
     if (error) {
-      console.error("Error querying admin_users table:", error.message);
+      console.error("Error querying slog_admin_users table:", error.message);
       return {
         authorized: false,
         role: null,

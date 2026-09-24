@@ -8,6 +8,7 @@ import { isPostVisibleToUser, calculateReadingTime } from "@/lib/utils/public-po
 import { MarkdownRenderer } from "@/components/public/MarkdownRenderer";
 import { PostGallery } from "@/components/public/PostGallery";
 import { MapPin, Calendar, Clock, ArrowLeft, ArrowRight, Share2, Compass } from "lucide-react";
+import { SAMPLE_POSTS } from "@/lib/data/sample-posts";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   const { slug } = await params;
   const supabase = createAdminClient();
 
-  const { data: post } = await (supabase.from("posts") as any)
+  const { data: post } = await (supabase.from("slog_posts") as any)
     .select("title, excerpt, cover_image, location")
     .eq("slug", slug)
     .single();
@@ -50,12 +51,25 @@ export default async function PostPage({ params }: PostPageProps) {
   const isAdmin = adminCheck.authorized;
 
   // Query post by slug
-  const { data: post, error } = await (supabase.from("posts") as any)
-    .select("*")
-    .eq("slug", slug)
-    .single();
+  let post: any = null;
+  try {
+    const { data, error } = await (supabase.from("slog_posts") as any)
+      .select("*")
+      .eq("slug", slug)
+      .single();
+    if (!error && data) {
+      post = data;
+    }
+  } catch (e) {
+    console.warn("Could not query post from Supabase:", e);
+  }
 
-  if (error || !post) {
+  // Fallback to sample posts if not in DB
+  if (!post) {
+    post = SAMPLE_POSTS.find((p) => p.slug === slug) || null;
+  }
+
+  if (!post) {
     notFound();
   }
 
@@ -67,7 +81,7 @@ export default async function PostPage({ params }: PostPageProps) {
   const readingTime = calculateReadingTime(post.content);
 
   // Fetch neighboring stories for navigation
-  const { data: adjacentPosts } = await (supabase.from("posts") as any)
+  const { data: adjacentPosts } = await (supabase.from("slog_posts") as any)
     .select("slug, title, location, trip_date")
     .eq("published", true)
     .order("trip_date", { ascending: false });

@@ -45,11 +45,11 @@ export async function createPostAction(formData: FormData) {
   const baseSlug = customSlug ? slugify(customSlug) : slugify(title);
 
   // Fetch existing slugs to prevent collisions
-  const { data: existingRows } = await (supabase.from("posts") as any).select("slug");
+  const { data: existingRows } = await (supabase.from("slog_posts") as any).select("slug");
   const existingSlugs = (existingRows || []).map((r: { slug: string }) => r.slug);
   const uniqueSlug = resolveUniqueSlug(baseSlug, existingSlugs);
 
-  const { data, error } = await (supabase.from("posts") as any)
+  const { data, error } = await (supabase.from("slog_posts") as any)
     .insert({
       title,
       slug: uniqueSlug,
@@ -99,13 +99,13 @@ export async function updatePostAction(id: string, formData: FormData) {
   const baseSlug = customSlug ? slugify(customSlug) : slugify(title);
 
   // Check existing slugs excluding current post
-  const { data: existingRows } = await (supabase.from("posts") as any)
+  const { data: existingRows } = await (supabase.from("slog_posts") as any)
     .select("slug")
     .neq("id", id);
   const existingSlugs = (existingRows || []).map((r: { slug: string }) => r.slug);
   const uniqueSlug = resolveUniqueSlug(baseSlug, existingSlugs);
 
-  const { error } = await (supabase.from("posts") as any)
+  const { error } = await (supabase.from("slog_posts") as any)
     .update({
       title,
       slug: uniqueSlug,
@@ -137,7 +137,7 @@ export async function deletePostAction(id: string) {
   await requireAdmin();
   const supabase = createAdminClient();
 
-  const { error } = await (supabase.from("posts") as any).delete().eq("id", id);
+  const { error } = await (supabase.from("slog_posts") as any).delete().eq("id", id);
 
   if (error) {
     console.error("Error deleting post:", error);
@@ -154,7 +154,7 @@ export async function togglePostPublishAction(id: string, currentPublished: bool
   await requireAdmin();
   const supabase = createAdminClient();
 
-  const { error } = await (supabase.from("posts") as any)
+  const { error } = await (supabase.from("slog_posts") as any)
     .update({ published: !currentPublished, updated_at: new Date().toISOString() })
     .eq("id", id);
 

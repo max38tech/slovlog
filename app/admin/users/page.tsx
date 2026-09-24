@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export default async function AdminUsersPage() {
   const supabase = createAdminClient();
 
-  const { data: dbUsers } = await (supabase.from("admin_users") as any)
+  const { data: dbUsers } = await (supabase.from("slog_admin_users") as any)
     .select("*")
     .order("created_at", { ascending: true });
 

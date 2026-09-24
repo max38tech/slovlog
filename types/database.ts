@@ -9,7 +9,7 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      admin_users: {
+      slog_admin_users: {
         Row: {
           id: string;
           email: string;
@@ -30,7 +30,7 @@ export interface Database {
         };
         Relationships: [];
       };
-      posts: {
+      slog_posts: {
         Row: {
           id: string;
           slug: string;
@@ -78,7 +78,7 @@ export interface Database {
         };
         Relationships: [];
       };
-      media: {
+      slog_media: {
         Row: {
           id: string;
           file_name: string;
@@ -119,7 +119,7 @@ export interface Database {
       [_ in never]: never;
     };
     Functions: {
-      is_admin: {
+      slog_is_admin: {
         Args: Record<PropertyKey, never>;
         Returns: boolean;
       };
@@ -133,11 +133,11 @@ export interface Database {
   };
 }
 
-export type Post = Database["public"]["Tables"]["posts"]["Row"];
-export type PostInsert = Database["public"]["Tables"]["posts"]["Insert"];
-export type PostUpdate = Database["public"]["Tables"]["posts"]["Update"];
+export type Post = Database["public"]["Tables"]["slog_posts"]["Row"];
+export type PostInsert = Database["public"]["Tables"]["slog_posts"]["Insert"];
+export type PostUpdate = Database["public"]["Tables"]["slog_posts"]["Update"];
 
-export type MediaItem = Database["public"]["Tables"]["media"]["Row"];
-export type MediaInsert = Database["public"]["Tables"]["media"]["Insert"];
+export type MediaItem = Database["public"]["Tables"]["slog_media"]["Row"];
+export type MediaInsert = Database["public"]["Tables"]["slog_media"]["Insert"];
 
-export type AdminUser = Database["public"]["Tables"]["admin_users"]["Row"];
+export type AdminUser = Database["public"]["Tables"]["slog_admin_users"]["Row"];

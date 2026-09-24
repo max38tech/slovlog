@@ -12,7 +12,7 @@ export default async function EditPostPage({ params }: EditPostPageProps) {
   const { id } = await params;
   const supabase = createAdminClient();
 
-  const { data: post, error } = await (supabase.from("posts") as any)
+  const { data: post, error } = await (supabase.from("slog_posts") as any)
     .select("*")
     .eq("id", id)
     .single();

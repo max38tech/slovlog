@@ -23,7 +23,7 @@ A modern, responsive travel journal built to document a journey across the green
   * **Plus Jakarta Sans**: Clean geometric sans fallback for high editorial readability.
 * **Logo & Emblem**: **Ljubljana Dragon** (`public/brand/ljubljana-dragon.png`), symbol of courage and guardian of the capital city.
 * **Database & Auth**: **Supabase PostgreSQL** with Row-Level Security (RLS) and `@supabase/ssr` Cookie-based sessions.
-* **Media Storage**: **Supabase Storage** (`slovlog-media` bucket) served through global CDN.
+* **Media Storage**: **Supabase Storage** (`slog-media` bucket) served through global CDN.
 * **Hosting**: **Vercel** with custom domain **`slovlog.com`**.
 
 ---
@@ -46,7 +46,7 @@ A modern, responsive travel journal built to document a journey across the green
 ### 2. Protected Administration CMS (`slovlog.com/admin`)
 * **Google OAuth Sign-In**:
   * One-click Google authentication at `/admin/login`.
-  * Middleware and OAuth callback exchange cookies and check identity against the `admin_users` table.
+  * Middleware and OAuth callback exchange cookies and check identity against the `slog_admin_users` table.
 * **Super-Admin / Owner Protection**:
   * **`shawn.shiobara@gmail.com`** is pre-seeded and permanently locked as the site owner.
   * System rules strictly prohibit deleting or demoting the owner account.
@@ -62,7 +62,7 @@ A modern, responsive travel journal built to document a journey across the green
   * Toggle between **Draft** and **Published** status.
 * **Media Library (`/admin/media`)**:
   * Drag-and-drop multi-file uploader (JPEG, PNG, WEBP, AVIF, GIF, SVG up to 20MB).
-  * Direct upload to Supabase Storage bucket `slovlog-media`.
+  * Direct upload to Supabase Storage bucket `slog-media`.
   * Visual gallery grid with dimensions, size, and date.
   * **1-Click "Copy Public URL"** button with instant toast notification for pasting into stories.
   * Photo deletion (removes from both storage and database).
@@ -80,7 +80,7 @@ A modern, responsive travel journal built to document a journey across the green
 1. Open your [Supabase Project Dashboard](https://supabase.com/dashboard).
 2. Go to the **SQL Editor** on the left menu.
 3. Open [`supabase/migrations/20260924_init.sql`](./supabase/migrations/20260924_init.sql) from this repository, paste the entire SQL content, and click **Run**.
-   * *This creates `admin_users`, `posts`, and `media` tables, enables RLS, creates the `slovlog-media` storage bucket, and pre-seeds Shawn Shiobara as owner with initial sample stories.*
+   * *This creates the `slog_admin_users`, `slog_posts`, and `slog_media` tables (with `slog_` prefix for shared database isolation), enables RLS, creates the `slog-media` storage bucket, and pre-seeds Shawn Shiobara as owner with initial sample stories.*
 
 ### Step 2: Configure Google OAuth
 

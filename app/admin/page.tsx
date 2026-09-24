@@ -17,10 +17,10 @@ export default async function AdminDashboardPage() {
   const supabase = createAdminClient();
 
   const [{ data: posts }, { data: media }] = await Promise.all([
-    (supabase.from("posts") as any)
+    (supabase.from("slog_posts") as any)
       .select("id, title, slug, location, trip_date, published, featured, created_at")
       .order("trip_date", { ascending: false }),
-    (supabase.from("media") as any).select("id"),
+    (supabase.from("slog_media") as any).select("id"),
   ]);
 
   const allPosts = posts || [];

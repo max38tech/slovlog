@@ -5,7 +5,7 @@ import { createClient, createAdminClient } from "@/lib/supabase/server";
 import { validateMediaUpload, sanitizeFileName } from "@/lib/utils/media";
 import { verifyAdminUser } from "@/lib/auth";
 
-const BUCKET_NAME = "slovlog-media";
+const BUCKET_NAME = "slog-media";
 
 async function requireAdmin() {
   const supabase = await createClient();
@@ -71,7 +71,7 @@ export async function uploadMediaAction(formData: FormData) {
     const publicUrl = urlData.publicUrl;
 
     // Record in database
-    const { data: mediaRecord, error: dbError } = await (supabase.from("media") as any)
+    const { data: mediaRecord, error: dbError } = await (supabase.from("slog_media") as any)
       .insert({
         file_name: cleanName,
         file_path: filePath,
@@ -112,7 +112,7 @@ export async function deleteMediaAction(id: string, filePath: string) {
     }
 
     // Remove from database
-    const { error: dbError } = await (supabase.from("media") as any)
+    const { error: dbError } = await (supabase.from("slog_media") as any)
       .delete()
       .eq("id", id);
 

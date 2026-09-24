@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export default async function AdminMediaPage() {
   const supabase = createAdminClient();
 
-  const { data: mediaItems } = await (supabase.from("media") as any)
+  const { data: mediaItems } = await (supabase.from("slog_media") as any)
     .select("*")
     .order("created_at", { ascending: false });
 
