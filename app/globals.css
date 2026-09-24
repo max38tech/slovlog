@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Slovenian Tricolor subtle accent bar */
+.slovenia-tricolor {
+  background: linear-gradient(
+    90deg,
+    #005da4 0%,
+    #005da4 33.3%,
+    #ffffff 33.3%,
+    #ffffff 66.6%,
+    #c8102e 66.6%,
+    #c8102e 100%
+  );
+}
+
+.slovenia-accent-bar {
+  background: linear-gradient(
+    90deg,
+    #005da4 0%,
+    #78a22f 40%,
+    #ffffff 70%,
+    #c8102e 100%
+  );
+}
