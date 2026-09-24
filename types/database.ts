@@ -13,21 +13,22 @@ export interface Database {
         Row: {
           id: string;
           email: string;
-          role: 'owner' | 'admin';
+          role: "owner" | "admin";
           created_at: string;
         };
         Insert: {
           id?: string;
           email: string;
-          role?: 'owner' | 'admin';
+          role?: "owner" | "admin";
           created_at?: string;
         };
         Update: {
           id?: string;
           email?: string;
-          role?: 'owner' | 'admin';
+          role?: "owner" | "admin";
           created_at?: string;
         };
+        Relationships: [];
       };
       posts: {
         Row: {
@@ -75,6 +76,7 @@ export interface Database {
           created_at?: string;
           updated_at?: string;
         };
+        Relationships: [];
       };
       media: {
         Row: {
@@ -110,16 +112,32 @@ export interface Database {
           location?: string | null;
           created_at?: string;
         };
+        Relationships: [];
       };
+    };
+    Views: {
+      [_ in never]: never;
+    };
+    Functions: {
+      is_admin: {
+        Args: Record<PropertyKey, never>;
+        Returns: boolean;
+      };
+    };
+    Enums: {
+      [_ in never]: never;
+    };
+    CompositeTypes: {
+      [_ in never]: never;
     };
   };
 }
 
-export type Post = Database['public']['Tables']['posts']['Row'];
-export type PostInsert = Database['public']['Tables']['posts']['Insert'];
-export type PostUpdate = Database['public']['Tables']['posts']['Update'];
+export type Post = Database["public"]["Tables"]["posts"]["Row"];
+export type PostInsert = Database["public"]["Tables"]["posts"]["Insert"];
+export type PostUpdate = Database["public"]["Tables"]["posts"]["Update"];
 
-export type MediaItem = Database['public']['Tables']['media']['Row'];
-export type MediaInsert = Database['public']['Tables']['media']['Insert'];
+export type MediaItem = Database["public"]["Tables"]["media"]["Row"];
+export type MediaInsert = Database["public"]["Tables"]["media"]["Insert"];
 
-export type AdminUser = Database['public']['Tables']['admin_users']['Row'];
+export type AdminUser = Database["public"]["Tables"]["admin_users"]["Row"];
