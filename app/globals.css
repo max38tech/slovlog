@@ -7,11 +7,17 @@
   --foreground: #0f172a;
 }
 
+.dark {
+  --background: #0b111e;
+  --foreground: #f1f5f9;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* Universa is a geometric display all-caps typeface.
@@ -44,4 +50,8 @@ body {
     #ffffff 70%,
     #c8102e 100%
   );
+}
+
+.dark .slovenia-accent-bar {
+  box-shadow: 0 0 16px rgba(0, 93, 164, 0.4);
 }

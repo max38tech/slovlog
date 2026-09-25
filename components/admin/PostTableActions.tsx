@@ -46,22 +46,22 @@ export function PostTableActions({ postId, published }: PostTableActionsProps) {
       <button
         onClick={handleTogglePublish}
         disabled={isPending}
-        className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors disabled:opacity-40"
+        className="p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors disabled:opacity-40"
         title={published ? "Unpublish story" : "Publish story"}
       >
         {isPending ? (
           <Loader2 className="w-4 h-4 animate-spin" />
         ) : published ? (
-          <EyeOff className="w-4 h-4 text-slate-500" />
+          <EyeOff className="w-4 h-4 text-slate-500 dark:text-slate-400" />
         ) : (
-          <Eye className="w-4 h-4 text-emerald-600" />
+          <Eye className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
         )}
       </button>
 
       <button
         onClick={handleDelete}
         disabled={isPending}
-        className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors disabled:opacity-40"
+        className="p-1.5 rounded-lg text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors disabled:opacity-40"
         title="Delete story"
       >
         <Trash2 className="w-4 h-4" />

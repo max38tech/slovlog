@@ -62,9 +62,9 @@ export function MediaGrid({ items }: { items: MediaItemProps[] }) {
 
   if (items.length === 0) {
     return (
-      <div className="bg-white border border-slate-200 rounded-2xl p-12 text-center text-slate-500">
-        <p className="font-medium text-slate-700">No media uploaded yet</p>
-        <p className="text-xs text-slate-400 mt-1">
+      <div className="bg-white dark:bg-[#131d2e] border border-slate-200 dark:border-slate-800 rounded-2xl p-12 text-center text-slate-500 dark:text-slate-400">
+        <p className="font-medium text-slate-700 dark:text-slate-200">No media uploaded yet</p>
+        <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
           Use the uploader above to add photos of your journey across Slovenia.
         </p>
       </div>
@@ -76,10 +76,10 @@ export function MediaGrid({ items }: { items: MediaItemProps[] }) {
       {items.map((item) => (
         <div
           key={item.id}
-          className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs hover:shadow transition-all group flex flex-col"
+          className="bg-white dark:bg-[#131d2e] border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-xs hover:shadow transition-all group flex flex-col"
         >
           {/* Image Thumbnail */}
-          <div className="relative aspect-[4/3] bg-slate-100 overflow-hidden">
+          <div className="relative aspect-[4/3] bg-slate-100 dark:bg-slate-800 overflow-hidden">
             <Image
               src={item.public_url}
               alt={item.caption || item.file_name}
@@ -88,7 +88,7 @@ export function MediaGrid({ items }: { items: MediaItemProps[] }) {
             />
             {item.location && (
               <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-xs text-white text-[10px] font-medium flex items-center gap-1">
-                <MapPin className="w-3 h-3 text-slovenia-green-leaf" />
+                <MapPin className="w-3 h-3 text-slovenia-green-leaf dark:text-emerald-400" />
                 {item.location}
               </span>
             )}
@@ -98,32 +98,32 @@ export function MediaGrid({ items }: { items: MediaItemProps[] }) {
           <div className="p-3.5 flex-1 flex flex-col justify-between">
             <div>
               <p
-                className="font-medium text-xs text-slate-800 truncate"
+                className="font-medium text-xs text-slate-800 dark:text-slate-200 truncate"
                 title={item.file_name}
               >
                 {item.caption || item.file_name}
               </p>
-              <div className="flex items-center justify-between text-[11px] text-slate-400 mt-1">
+              <div className="flex items-center justify-between text-[11px] text-slate-400 dark:text-slate-500 mt-1">
                 <span>{formatFileSize(item.size_bytes)}</span>
                 <span>{item.created_at?.split("T")[0]}</span>
               </div>
             </div>
 
             {/* Action Bar */}
-            <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+            <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
               <button
                 type="button"
                 onClick={() => handleCopy(item.id, item.public_url)}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition-colors flex-1 justify-center"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-medium transition-colors flex-1 justify-center"
               >
                 {copiedId === item.id ? (
                   <>
-                    <Check className="w-3.5 h-3.5 text-emerald-600" />
-                    <span className="text-emerald-700">Copied!</span>
+                    <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                    <span className="text-emerald-700 dark:text-emerald-300">Copied!</span>
                   </>
                 ) : (
                   <>
-                    <Copy className="w-3.5 h-3.5 text-slate-500" />
+                    <Copy className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
                     <span>Copy URL</span>
                   </>
                 )}
@@ -133,7 +133,7 @@ export function MediaGrid({ items }: { items: MediaItemProps[] }) {
                 type="button"
                 onClick={() => handleDelete(item.id, item.file_path)}
                 disabled={isPending}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                className="p-1.5 rounded-lg text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors"
                 title="Delete photo"
               >
                 <Trash2 className="w-4 h-4" />

@@ -185,19 +185,19 @@ export function PostEditor({ post }: PostEditorProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-8 animate-fade-in pb-16">
       {/* Top action header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-200 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-5">
         <div className="flex items-center gap-3">
           <Link
             href="/admin/posts"
-            className="p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-200/60 transition-colors"
+            className="p-2 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800 transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
           </Link>
           <div>
-            <h1 className="font-universa text-2xl font-normal text-slate-900 tracking-[0.06em] uppercase">
+            <h1 className="font-universa text-2xl font-normal text-slate-900 dark:text-white tracking-[0.06em] uppercase">
               {isEditing ? "Edit Travel Story" : "Write New Travel Story"}
             </h1>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Document memories, photos, and destinations in Slovenia.
             </p>
           </div>
@@ -209,7 +209,7 @@ export function PostEditor({ post }: PostEditorProps) {
               type="button"
               onClick={handleDelete}
               disabled={isPending}
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-red-600 hover:bg-red-50 text-xs font-medium border border-red-200 transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 text-xs font-medium border border-red-200 dark:border-red-900/40 transition-colors"
             >
               <Trash2 className="w-3.5 h-3.5" />
               Delete
@@ -236,7 +236,7 @@ export function PostEditor({ post }: PostEditorProps) {
         <div className="lg:col-span-2 space-y-5">
           {/* Title */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
               Story Title *
             </label>
             <input
@@ -244,7 +244,7 @@ export function PostEditor({ post }: PostEditorProps) {
               value={title}
               onChange={handleTitleChange}
               placeholder="e.g. Arriving in Ljubljana: Dragons, Bridges & Castle Views"
-              className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slovenia-blue/20 focus:border-slovenia-blue font-medium"
+              className="w-full px-4 py-3 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slovenia-blue/20 focus:border-slovenia-blue font-medium"
               required
             />
           </div>
@@ -252,10 +252,10 @@ export function PostEditor({ post }: PostEditorProps) {
           {/* Slug */}
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <label className="text-xs font-semibold text-slate-700 uppercase tracking-wider">
+              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                 URL Slug
               </label>
-              <span className="text-[11px] text-slate-400">
+              <span className="text-[11px] text-slate-400 dark:text-slate-500">
                 slovlog.com/posts/<strong>{slug || "..."}</strong>
               </span>
             </div>
@@ -267,13 +267,13 @@ export function PostEditor({ post }: PostEditorProps) {
                 setIsSlugManual(true);
               }}
               placeholder="auto-generated-slug"
-              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-slate-700 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-slovenia-blue/20 focus:border-slovenia-blue"
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-700 dark:text-slate-300 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-slovenia-blue/20 focus:border-slovenia-blue"
             />
           </div>
 
           {/* Excerpt */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
               Summary / Excerpt
             </label>
             <textarea
@@ -281,17 +281,17 @@ export function PostEditor({ post }: PostEditorProps) {
               value={excerpt}
               onChange={(e) => setExcerpt(e.target.value)}
               placeholder="Brief 1-2 sentence preview for cards and search engines..."
-              className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-slovenia-blue/20 focus:border-slovenia-blue"
+              className="w-full px-4 py-2.5 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-slovenia-blue/20 focus:border-slovenia-blue"
             />
           </div>
         </div>
 
         {/* Sidebar Controls */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-5 shadow-sm">
+        <div className="bg-white dark:bg-[#131d2e] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-5 shadow-sm">
           {/* Publish / Featured Toggles */}
-          <div className="space-y-3 pb-4 border-b border-slate-100">
+          <div className="space-y-3 pb-4 border-b border-slate-100 dark:border-slate-800">
             <label className="flex items-center justify-between cursor-pointer">
-              <span className="text-sm font-medium text-slate-800">Published to slovlog.com</span>
+              <span className="text-sm font-medium text-slate-800 dark:text-slate-200">Published to slovlog.com</span>
               <input
                 type="checkbox"
                 checked={published}
@@ -301,7 +301,7 @@ export function PostEditor({ post }: PostEditorProps) {
             </label>
 
             <label className="flex items-center justify-between cursor-pointer">
-              <span className="text-sm font-medium text-slate-800">Featured Story (Hero)</span>
+              <span className="text-sm font-medium text-slate-800 dark:text-slate-200">Featured Story (Hero)</span>
               <input
                 type="checkbox"
                 checked={featured}
@@ -313,8 +313,8 @@ export function PostEditor({ post }: PostEditorProps) {
 
           {/* Location */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-slovenia-green-leaf" />
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 text-slovenia-green-leaf dark:text-emerald-400" />
               Destination / Stop
             </label>
             <input
@@ -322,7 +322,7 @@ export function PostEditor({ post }: PostEditorProps) {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="e.g. Ljubljana"
-              className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-slovenia-blue/20 focus:border-slovenia-blue"
+              className="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-slovenia-blue/20 focus:border-slovenia-blue"
             />
             {/* Quick destination tags */}
             <div className="flex flex-wrap gap-1.5 mt-2">
@@ -333,8 +333,8 @@ export function PostEditor({ post }: PostEditorProps) {
                   onClick={() => setLocation(loc)}
                   className={`text-[11px] px-2 py-0.5 rounded-lg border transition-colors ${
                     location === loc
-                      ? "bg-slovenia-green/10 text-slovenia-green border-slovenia-green/30 font-medium"
-                      : "bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100"
+                      ? "bg-slovenia-green/10 dark:bg-emerald-950/40 text-slovenia-green dark:text-emerald-300 border-slovenia-green/30 dark:border-emerald-800/40 font-medium"
+                      : "bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700"
                   }`}
                 >
                   {loc}
@@ -345,22 +345,22 @@ export function PostEditor({ post }: PostEditorProps) {
 
           {/* Trip Date */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5 text-slovenia-blue" />
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+              <Calendar className="w-3.5 h-3.5 text-slovenia-blue dark:text-blue-400" />
               Trip Date
             </label>
             <input
               type="date"
               value={tripDate}
               onChange={(e) => setTripDate(e.target.value)}
-              className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-slovenia-blue/20 focus:border-slovenia-blue"
+              className="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-slovenia-blue/20 focus:border-slovenia-blue"
             />
           </div>
 
           {/* Cover Image URL */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-              <ImageIcon className="w-3.5 h-3.5 text-slate-500" />
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+              <ImageIcon className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
               Cover Image URL
             </label>
             <input
@@ -368,10 +368,10 @@ export function PostEditor({ post }: PostEditorProps) {
               value={coverImage}
               onChange={(e) => setCoverImage(e.target.value)}
               placeholder="https://... or choose from Media Library"
-              className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-slovenia-blue/20 focus:border-slovenia-blue"
+              className="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-slovenia-blue/20 focus:border-slovenia-blue"
             />
             {coverImage && (
-              <div className="mt-2 relative w-full h-24 rounded-lg overflow-hidden border border-slate-200">
+              <div className="mt-2 relative w-full h-24 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700">
                 <Image
                   src={coverImage}
                   alt="Cover preview"
@@ -385,14 +385,14 @@ export function PostEditor({ post }: PostEditorProps) {
       </div>
 
       {/* Split-View Markdown Editor */}
-      <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-[#131d2e] border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
         {/* Editor Toolbar */}
-        <div className="p-3 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
+        <div className="p-3 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-1">
             <button
               type="button"
               onClick={() => insertMarkdown("**", "**")}
-              className="p-1.5 rounded-lg hover:bg-slate-200 text-slate-600 hover:text-slate-900"
+              className="p-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
               title="Bold (**text**)"
             >
               <Bold className="w-4 h-4" />
@@ -400,7 +400,7 @@ export function PostEditor({ post }: PostEditorProps) {
             <button
               type="button"
               onClick={() => insertMarkdown("*", "*")}
-              className="p-1.5 rounded-lg hover:bg-slate-200 text-slate-600 hover:text-slate-900"
+              className="p-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
               title="Italic (*text*)"
             >
               <Italic className="w-4 h-4" />
@@ -408,7 +408,7 @@ export function PostEditor({ post }: PostEditorProps) {
             <button
               type="button"
               onClick={() => insertMarkdown("## ")}
-              className="p-1.5 rounded-lg hover:bg-slate-200 text-slate-600 hover:text-slate-900"
+              className="p-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
               title="Heading 2"
             >
               <Heading2 className="w-4 h-4" />
@@ -416,16 +416,16 @@ export function PostEditor({ post }: PostEditorProps) {
             <button
               type="button"
               onClick={() => insertMarkdown("### ")}
-              className="p-1.5 rounded-lg hover:bg-slate-200 text-slate-600 hover:text-slate-900"
+              className="p-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
               title="Heading 3"
             >
               <Heading3 className="w-4 h-4" />
             </button>
-            <span className="w-px h-5 bg-slate-200 mx-1" />
+            <span className="w-px h-5 bg-slate-200 dark:bg-slate-700 mx-1" />
             <button
               type="button"
               onClick={() => insertMarkdown("> ")}
-              className="p-1.5 rounded-lg hover:bg-slate-200 text-slate-600 hover:text-slate-900"
+              className="p-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
               title="Quote"
             >
               <Quote className="w-4 h-4" />
@@ -433,7 +433,7 @@ export function PostEditor({ post }: PostEditorProps) {
             <button
               type="button"
               onClick={() => insertMarkdown("- ")}
-              className="p-1.5 rounded-lg hover:bg-slate-200 text-slate-600 hover:text-slate-900"
+              className="p-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
               title="Bullet list"
             >
               <List className="w-4 h-4" />
@@ -441,7 +441,7 @@ export function PostEditor({ post }: PostEditorProps) {
             <button
               type="button"
               onClick={() => insertMarkdown("[", "](https://)")}
-              className="p-1.5 rounded-lg hover:bg-slate-200 text-slate-600 hover:text-slate-900"
+              className="p-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
               title="Link"
             >
               <LinkIcon className="w-4 h-4" />
@@ -449,7 +449,7 @@ export function PostEditor({ post }: PostEditorProps) {
             <button
               type="button"
               onClick={() => insertMarkdown("```\n", "\n```")}
-              className="p-1.5 rounded-lg hover:bg-slate-200 text-slate-600 hover:text-slate-900"
+              className="p-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
               title="Code block"
             >
               <Code className="w-4 h-4" />
@@ -457,7 +457,7 @@ export function PostEditor({ post }: PostEditorProps) {
             <button
               type="button"
               onClick={() => insertMarkdown("![Caption](", ")")}
-              className="p-1.5 rounded-lg hover:bg-slate-200 text-slate-600 hover:text-slate-900"
+              className="p-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
               title="Insert Image Markdown"
             >
               <ImageIcon className="w-4 h-4" />
@@ -465,14 +465,14 @@ export function PostEditor({ post }: PostEditorProps) {
           </div>
 
           {/* View mode toggle */}
-          <div className="flex items-center gap-1 bg-slate-200/70 p-1 rounded-xl">
+          <div className="flex items-center gap-1 bg-slate-200/70 dark:bg-slate-800 p-1 rounded-xl">
             <button
               type="button"
               onClick={() => setViewMode("edit")}
               className={`p-1.5 rounded-lg text-xs font-medium flex items-center gap-1 transition-colors ${
                 viewMode === "edit"
-                  ? "bg-white text-slate-900 shadow-xs"
-                  : "text-slate-600 hover:text-slate-900"
+                  ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
               }`}
             >
               <Edit3 className="w-3.5 h-3.5" />
@@ -483,8 +483,8 @@ export function PostEditor({ post }: PostEditorProps) {
               onClick={() => setViewMode("split")}
               className={`p-1.5 rounded-lg text-xs font-medium flex items-center gap-1 transition-colors ${
                 viewMode === "split"
-                  ? "bg-white text-slate-900 shadow-xs"
-                  : "text-slate-600 hover:text-slate-900"
+                  ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
               }`}
             >
               <Columns2 className="w-3.5 h-3.5" />
@@ -495,8 +495,8 @@ export function PostEditor({ post }: PostEditorProps) {
               onClick={() => setViewMode("preview")}
               className={`p-1.5 rounded-lg text-xs font-medium flex items-center gap-1 transition-colors ${
                 viewMode === "preview"
-                  ? "bg-white text-slate-900 shadow-xs"
-                  : "text-slate-600 hover:text-slate-900"
+                  ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
               }`}
             >
               <Eye className="w-3.5 h-3.5" />
@@ -506,7 +506,7 @@ export function PostEditor({ post }: PostEditorProps) {
         </div>
 
         {/* Content Area */}
-        <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200 min-h-[450px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200 dark:divide-slate-800 min-h-[450px]">
           {/* Markdown Textarea */}
           {(viewMode === "edit" || viewMode === "split") && (
             <div className={viewMode === "edit" ? "col-span-2" : ""}>
@@ -515,7 +515,7 @@ export function PostEditor({ post }: PostEditorProps) {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 placeholder="Write your story in Markdown here... Use headers, bold text, lists, and images."
-                className="w-full h-full min-h-[450px] p-5 font-mono text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none resize-y"
+                className="w-full h-full min-h-[450px] p-5 font-mono text-sm bg-transparent text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none resize-y"
               />
             </div>
           )}
@@ -523,17 +523,17 @@ export function PostEditor({ post }: PostEditorProps) {
           {/* Live Preview */}
           {(viewMode === "preview" || viewMode === "split") && (
             <div
-              className={`p-6 overflow-y-auto bg-slate-50/50 min-h-[450px] ${
+              className={`p-6 overflow-y-auto bg-slate-50/50 dark:bg-slate-950/50 min-h-[450px] ${
                 viewMode === "preview" ? "col-span-2" : ""
               }`}
             >
-              <div className="prose prose-slate max-w-none prose-headings:font-sans prose-headings:font-bold prose-headings:text-slate-900 prose-a:text-slovenia-blue">
+              <div className="prose prose-slate dark:prose-invert max-w-none prose-headings:font-sans prose-headings:font-bold prose-headings:text-slate-900 dark:prose-headings:text-white prose-a:text-slovenia-blue dark:prose-a:text-blue-400">
                 {content.trim() ? (
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>
                     {content}
                   </ReactMarkdown>
                 ) : (
-                  <p className="text-slate-400 italic">
+                  <p className="text-slate-400 dark:text-slate-500 italic">
                     Live Markdown preview will appear here as you write...
                   </p>
                 )}
@@ -544,12 +544,12 @@ export function PostEditor({ post }: PostEditorProps) {
       </div>
 
       {/* Photo Gallery Manager */}
-      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
-        <h3 className="font-universa text-lg font-normal text-slate-900 tracking-[0.06em] uppercase flex items-center gap-2">
-          <ImageIcon className="w-5 h-5 text-slovenia-green-leaf" />
+      <div className="bg-white dark:bg-[#131d2e] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm space-y-4">
+        <h3 className="font-universa text-lg font-normal text-slate-900 dark:text-white tracking-[0.06em] uppercase flex items-center gap-2">
+          <ImageIcon className="w-5 h-5 text-slovenia-green-leaf dark:text-emerald-400" />
           Photo Gallery Attachments
         </h3>
-        <p className="text-xs text-slate-500">
+        <p className="text-xs text-slate-500 dark:text-slate-400">
           Add photo URLs that will be displayed in this story’s high-resolution lightbox gallery.
         </p>
 
@@ -559,12 +559,12 @@ export function PostEditor({ post }: PostEditorProps) {
             value={galleryInput}
             onChange={(e) => setGalleryInput(e.target.value)}
             placeholder="Paste image URL (from Supabase Media Library or external)..."
-            className="flex-1 px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-slovenia-blue/20 focus:border-slovenia-blue"
+            className="flex-1 px-4 py-2.5 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-slovenia-blue/20 focus:border-slovenia-blue"
           />
           <button
             type="button"
             onClick={handleAddGalleryImage}
-            className="px-4 py-2.5 rounded-xl bg-slate-800 text-white text-sm font-medium hover:bg-slate-900 transition-colors"
+            className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600 text-white text-sm font-medium transition-colors"
           >
             Add to Gallery
           </button>
@@ -575,7 +575,7 @@ export function PostEditor({ post }: PostEditorProps) {
             {galleryImages.map((imgUrl, idx) => (
               <div
                 key={idx}
-                className="group relative aspect-square rounded-xl overflow-hidden border border-slate-200 bg-slate-100 shadow-xs"
+                className="group relative aspect-square rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 shadow-xs"
               >
                 <Image
                   src={imgUrl}

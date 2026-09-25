@@ -11,10 +11,10 @@ export function PostGallery({ images }: { images: string[] }) {
   if (!images || images.length === 0) return null;
 
   return (
-    <section className="mt-12 pt-10 border-t border-slate-200">
+    <section className="mt-12 pt-10 border-t border-slate-200 dark:border-slate-800">
       <div className="flex items-center gap-2 mb-6">
-        <Images className="w-5 h-5 text-slovenia-green-leaf" />
-        <h3 className="font-universa text-xl font-normal text-slate-900 tracking-[0.06em] uppercase">
+        <Images className="w-5 h-5 text-slovenia-green-leaf dark:text-emerald-400" />
+        <h3 className="font-universa text-xl font-normal text-slate-900 dark:text-white tracking-[0.06em] uppercase">
           Photo Gallery ({images.length})
         </h3>
       </div>
@@ -24,7 +24,7 @@ export function PostGallery({ images }: { images: string[] }) {
           <div
             key={idx}
             onClick={() => setLightboxIndex(idx)}
-            className="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 cursor-pointer shadow-xs hover:shadow-md transition-all duration-300"
+            className="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 cursor-pointer shadow-xs hover:shadow-md transition-all duration-300 border border-slate-200/60 dark:border-slate-800"
           >
             <Image
               src={imgUrl}

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { createClient } from "@/lib/supabase/client";
 import {
   LayoutDashboard,
@@ -120,13 +121,16 @@ export function AdminSidebar({ userEmail, role }: AdminSidebarProps) {
             </span>
           </div>
 
-          <button
-            onClick={handleSignOut}
-            className="p-2 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition-colors"
-            title="Sign out of Admin"
-          >
-            <LogOut className="w-4 h-4" />
-          </button>
+          <div className="flex items-center gap-1.5">
+            <ThemeToggle />
+            <button
+              onClick={handleSignOut}
+              className="p-2 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition-colors"
+              title="Sign out of Admin"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </div>
     </aside>

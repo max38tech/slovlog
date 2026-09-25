@@ -18,12 +18,12 @@ export default async function AdminPostsPage() {
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-200 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-5">
         <div>
-          <h1 className="font-universa text-3xl font-normal text-slate-900 tracking-[0.06em] uppercase">
+          <h1 className="font-universa text-3xl font-normal text-slate-900 dark:text-white tracking-[0.06em] uppercase">
             Travel Stories
           </h1>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             Write, review, and organize travel journal entries from across Slovenia.
           </p>
         </div>
@@ -38,11 +38,11 @@ export default async function AdminPostsPage() {
       </div>
 
       {/* Posts Table */}
-      <div className="bg-white border border-slate-200/90 rounded-2xl shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-[#131d2e] border border-slate-200/90 dark:border-slate-800/90 rounded-2xl shadow-sm overflow-hidden">
         {allPosts.length === 0 ? (
-          <div className="py-16 text-center text-slate-500">
-            <p className="font-medium text-base text-slate-700">No stories written yet</p>
-            <p className="text-xs text-slate-400 mt-1 mb-5">
+          <div className="py-16 text-center text-slate-500 dark:text-slate-400">
+            <p className="font-medium text-base text-slate-700 dark:text-slate-200">No stories written yet</p>
+            <p className="text-xs text-slate-400 dark:text-slate-500 mt-1 mb-5">
               Begin documenting your journey through Slovenia.
             </p>
             <Link
@@ -57,7 +57,7 @@ export default async function AdminPostsPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-sm">
               <thead>
-                <tr className="bg-slate-50/80 border-b border-slate-200 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                <tr className="bg-slate-50/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   <th className="py-3.5 px-6">Story</th>
                   <th className="py-3.5 px-6">Destination</th>
                   <th className="py-3.5 px-6">Trip Date</th>
@@ -65,13 +65,13 @@ export default async function AdminPostsPage() {
                   <th className="py-3.5 px-6 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
                 {allPosts.map((post: any) => (
-                  <tr key={post.id} className="hover:bg-slate-50/60 transition-colors">
+                  <tr key={post.id} className="hover:bg-slate-50/60 dark:hover:bg-slate-800/50 transition-colors">
                     <td className="py-4 px-6">
                       <div className="flex items-center gap-3">
                         {post.cover_image && (
-                          <div className="relative w-12 h-12 rounded-lg overflow-hidden shrink-0 bg-slate-100 border border-slate-200">
+                          <div className="relative w-12 h-12 rounded-lg overflow-hidden shrink-0 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
                             <Image
                               src={post.cover_image}
                               alt=""
@@ -83,25 +83,25 @@ export default async function AdminPostsPage() {
                         <div className="min-w-0">
                           <Link
                             href={`/admin/posts/${post.id}/edit`}
-                            className="font-medium text-slate-900 hover:text-slovenia-blue line-clamp-1"
+                            className="font-medium text-slate-900 dark:text-white hover:text-slovenia-blue dark:hover:text-blue-400 line-clamp-1"
                           >
                             {post.title}
                           </Link>
-                          <div className="text-xs text-slate-400 font-mono mt-0.5 truncate max-w-xs">
+                          <div className="text-xs text-slate-400 dark:text-slate-500 font-mono mt-0.5 truncate max-w-xs">
                             /posts/{post.slug}
                           </div>
                         </div>
                       </div>
                     </td>
 
-                    <td className="py-4 px-6 text-slate-600">
-                      <span className="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-lg bg-slovenia-green/10 text-slovenia-green">
-                        <MapPin className="w-3 h-3 text-slovenia-green-leaf" />
+                    <td className="py-4 px-6 text-slate-600 dark:text-slate-300">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-lg bg-slovenia-green/10 dark:bg-emerald-950/40 text-slovenia-green dark:text-emerald-300 border border-slovenia-green/20 dark:border-emerald-800/40">
+                        <MapPin className="w-3 h-3 text-slovenia-green-leaf dark:text-emerald-400" />
                         {post.location || "Slovenia"}
                       </span>
                     </td>
 
-                    <td className="py-4 px-6 text-slate-600 text-xs">
+                    <td className="py-4 px-6 text-slate-600 dark:text-slate-300 text-xs">
                       <span className="flex items-center gap-1.5">
                         <Calendar className="w-3.5 h-3.5 text-slate-400" />
                         {post.trip_date}
@@ -113,14 +113,14 @@ export default async function AdminPostsPage() {
                         <span
                           className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${
                             post.published
-                              ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                              : "bg-slate-100 text-slate-600 border border-slate-200"
+                              ? "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/40"
+                              : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
                           }`}
                         >
                           {post.published ? "Published" : "Draft"}
                         </span>
                         {post.featured && (
-                          <span className="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200">
+                          <span className="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/40">
                             Featured
                           </span>
                         )}
@@ -133,7 +133,7 @@ export default async function AdminPostsPage() {
                           <Link
                             href={`/posts/${post.slug}`}
                             target="_blank"
-                            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                             title="View published story"
                           >
                             <ExternalLink className="w-4 h-4" />
@@ -141,7 +141,7 @@ export default async function AdminPostsPage() {
                         )}
                         <Link
                           href={`/admin/posts/${post.id}/edit`}
-                          className="p-1.5 rounded-lg text-slate-600 hover:text-slovenia-blue hover:bg-slate-100 transition-colors"
+                          className="p-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slovenia-blue dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                           title="Edit story"
                         >
                           <Edit className="w-4 h-4" />

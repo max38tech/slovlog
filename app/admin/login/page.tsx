@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, Suspense } from "react";
 import { ShieldAlert, ArrowLeft, Loader2 } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 function LoginForm() {
   const searchParams = useSearchParams();
@@ -19,12 +20,12 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-md bg-white border border-slate-200 rounded-2xl shadow-xl p-8 relative overflow-hidden">
+    <div className="w-full max-w-md bg-white dark:bg-[#131d2e] border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl p-8 relative overflow-hidden">
       {/* Top Slovenian tricolor accent bar */}
       <div className="absolute top-0 left-0 right-0 h-1.5 slovenia-accent-bar" />
 
       <div className="flex flex-col items-center text-center mb-8 pt-2">
-        <div className="relative w-20 h-20 mb-4 p-2 bg-slovenia-canvas rounded-2xl border border-slate-100 shadow-sm flex items-center justify-center">
+        <div className="relative w-20 h-20 mb-4 p-2 bg-slovenia-canvas dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm flex items-center justify-center">
           <Image
             src="/brand/ljubljana-dragon.png"
             alt="Ljubljana Dragon"
@@ -34,19 +35,19 @@ function LoginForm() {
             priority
           />
         </div>
-        <h1 className="font-universa text-3xl font-normal text-slate-900 tracking-[0.08em] uppercase">
+        <h1 className="font-universa text-3xl font-normal text-slate-900 dark:text-white tracking-[0.08em] uppercase">
           slovlog CMS
         </h1>
-        <p className="text-sm text-slate-500 mt-1">
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
           Slovenia Travel Journal Administration
         </p>
       </div>
 
       {error === "unauthorized" && (
-        <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-left flex gap-3 items-start animate-fade-in">
-          <ShieldAlert className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
-          <div className="text-xs text-red-800 space-y-1">
-            <p className="font-semibold text-red-900">Access Restricted</p>
+        <div className="mb-6 p-4 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/40 text-left flex gap-3 items-start animate-fade-in">
+          <ShieldAlert className="w-5 h-5 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
+          <div className="text-xs text-red-800 dark:text-red-200 space-y-1">
+            <p className="font-semibold text-red-900 dark:text-red-100">Access Restricted</p>
             <p>
               {unauthorizedEmail ? (
                 <>
@@ -56,7 +57,7 @@ function LoginForm() {
                 "Your Google account is not on the authorized administrators list."
               )}
             </p>
-            <p className="text-red-700 pt-1">
+            <p className="text-red-700 dark:text-red-300 pt-1">
               Please sign in with the authorized owner account (<span className="font-mono">shawn.shiobara@gmail.com</span>) or contact the owner.
             </p>
           </div>
@@ -64,15 +65,15 @@ function LoginForm() {
       )}
 
       {error === "missing_credentials" && (
-        <div className="mb-6 p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-800 flex gap-2 items-center">
-          <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0" />
+        <div className="mb-6 p-4 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/40 text-xs text-amber-800 dark:text-amber-200 flex gap-2 items-center">
+          <ShieldAlert className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
           Google OAuth credentials (GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET) are missing from your environment.
         </div>
       )}
 
       {(error === "auth_failed" || error === "state_mismatch") && (
-        <div className="mb-6 p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-800 flex gap-2 items-center">
-          <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0" />
+        <div className="mb-6 p-4 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/40 text-xs text-amber-800 dark:text-amber-200 flex gap-2 items-center">
+          <ShieldAlert className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
           Authentication failed or expired. Please try signing in again.
         </div>
       )}
@@ -80,10 +81,10 @@ function LoginForm() {
       <button
         onClick={handleGoogleLogin}
         disabled={loading}
-        className="w-full flex items-center justify-center gap-3 py-3.5 px-4 bg-white hover:bg-slate-50 text-slate-700 font-medium rounded-xl border border-slate-300 shadow-sm hover:shadow transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed group"
+        className="w-full flex items-center justify-center gap-3 py-3.5 px-4 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 font-medium rounded-xl border border-slate-300 dark:border-slate-700 shadow-sm hover:shadow transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed group"
       >
         {loading ? (
-          <Loader2 className="w-5 h-5 animate-spin text-slovenia-blue" />
+          <Loader2 className="w-5 h-5 animate-spin text-slovenia-blue dark:text-blue-400" />
         ) : (
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path
@@ -104,13 +105,13 @@ function LoginForm() {
             />
           </svg>
         )}
-        <span className="group-hover:text-slate-900">Sign in with Google</span>
+        <span className="group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Sign in with Google</span>
       </button>
 
-      <div className="mt-8 pt-6 border-t border-slate-100 flex justify-center">
+      <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 flex justify-center">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-slovenia-blue transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-slovenia-blue dark:hover:text-blue-400 transition-colors"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           Back to public blog (slovlog.com)
@@ -122,7 +123,10 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <main className="min-h-screen bg-slate-100/70 flex flex-col items-center justify-center p-4">
+    <main className="min-h-screen bg-slate-100/70 dark:bg-[#0b111e] flex flex-col items-center justify-center p-4 relative">
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
       <Suspense fallback={<div className="text-slate-400">Loading sign-in...</div>}>
         <LoginForm />
       </Suspense>

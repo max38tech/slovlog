@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Heart, MapPin, Lock } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Footer() {
   const destinations = [
@@ -101,8 +102,9 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <p>© {new Date().getFullYear()} slovlog.com. All rights reserved.</p>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-4">
             <span>Powered by Next.js, Vercel & Supabase</span>
+            <ThemeToggle />
           </div>
         </div>
       </div>

@@ -52,7 +52,7 @@ export default function AboutPage() {
       <div>
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-slovenia-blue transition-colors group"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-slovenia-blue dark:hover:text-blue-400 transition-colors group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
           Back to all stories
@@ -61,21 +61,21 @@ export default function AboutPage() {
 
       {/* Hero */}
       <div className="space-y-4 text-center sm:text-left">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slovenia-green/10 text-slovenia-green text-xs font-semibold">
-          <Compass className="w-3.5 h-3.5 text-slovenia-green-leaf" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slovenia-green/10 dark:bg-emerald-950/40 text-slovenia-green dark:text-emerald-300 border border-slovenia-green/20 dark:border-emerald-800/40 text-xs font-semibold">
+          <Compass className="w-3.5 h-3.5 text-slovenia-green-leaf dark:text-emerald-400" />
           The Itinerary & Story
         </div>
-        <h1 className="font-universa text-4xl sm:text-5xl font-normal text-slate-900 tracking-[0.06em] uppercase">
+        <h1 className="font-universa text-4xl sm:text-5xl font-normal text-slate-900 dark:text-white tracking-[0.06em] uppercase">
           About slovlog
         </h1>
-        <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-sans">
+        <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-sans">
           This blog documents our journey across Slovenia — a compact European jewel where towering limestone peaks, subterranean karst caves, lush wine regions, and the Adriatic sea sit just hours apart.
         </p>
       </div>
 
       {/* Dragon Emblem callout */}
-      <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6 shadow-xs">
-        <div className="w-20 h-20 rounded-2xl bg-slovenia-canvas border border-slate-100 p-2 shrink-0 flex items-center justify-center">
+      <div className="bg-white dark:bg-[#131d2e] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6 shadow-xs">
+        <div className="w-20 h-20 rounded-2xl bg-slovenia-canvas dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-2 shrink-0 flex items-center justify-center">
           <Image
             src="/brand/ljubljana-dragon.png"
             alt="Ljubljana Dragon"
@@ -85,10 +85,10 @@ export default function AboutPage() {
           />
         </div>
         <div className="space-y-2 text-center sm:text-left">
-          <h3 className="font-universa text-lg font-normal text-slate-900 tracking-[0.06em] uppercase">
+          <h3 className="font-universa text-lg font-normal text-slate-900 dark:text-white tracking-[0.06em] uppercase">
             Why the Dragon?
           </h3>
-          <p className="text-xs text-slate-600 leading-relaxed">
+          <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
             According to Greek myth, Jason and the Argonauts fled across the Danube and Sava rivers to Ljubljana, slaying a fierce dragon in the marshlands. Today, the dragon is the proud symbol of Ljubljana — guarding the bridges and representing courage, protection, and Slovenian resilience.
           </p>
         </div>
@@ -97,8 +97,8 @@ export default function AboutPage() {
       {/* Itinerary Timeline */}
       <div className="space-y-6">
         <div className="flex items-center gap-2">
-          <Navigation className="w-5 h-5 text-slovenia-blue" />
-          <h2 className="font-universa text-xl font-normal text-slate-900 tracking-[0.06em] uppercase">
+          <Navigation className="w-5 h-5 text-slovenia-blue dark:text-blue-400" />
+          <h2 className="font-universa text-xl font-normal text-slate-900 dark:text-white tracking-[0.06em] uppercase">
             Our Travel Route
           </h2>
         </div>
@@ -107,28 +107,28 @@ export default function AboutPage() {
           {itineraryStops.map((stop) => (
             <div
               key={stop.stop}
-              className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs hover:border-slovenia-blue/40 transition-colors flex flex-col sm:flex-row gap-5"
+              className="bg-white dark:bg-[#131d2e] border border-slate-200/90 dark:border-slate-800/90 rounded-2xl p-6 shadow-xs hover:border-slovenia-blue/40 dark:hover:border-blue-500/40 transition-colors flex flex-col sm:flex-row gap-5"
             >
               <div className="flex items-center sm:items-start gap-3 shrink-0">
-                <span className="font-universa text-2xl font-normal tracking-[0.06em] text-slovenia-blue/30 sm:w-10">
+                <span className="font-universa text-2xl font-normal tracking-[0.06em] text-slovenia-blue/30 dark:text-blue-400/30 sm:w-10">
                   {stop.stop}
                 </span>
-                <span className="inline-block text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slovenia-blue/10 text-slovenia-blue sm:hidden">
+                <span className="inline-block text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slovenia-blue/10 dark:bg-slovenia-blue/20 text-slovenia-blue dark:text-blue-300 sm:hidden">
                   {stop.tag}
                 </span>
               </div>
 
               <div className="space-y-1.5 flex-1">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-sans text-lg font-bold text-slate-900">
+                  <h3 className="font-sans text-lg font-bold text-slate-900 dark:text-white">
                     {stop.destination}
                   </h3>
-                  <span className="hidden sm:inline-block text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slovenia-blue/10 text-slovenia-blue">
+                  <span className="hidden sm:inline-block text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slovenia-blue/10 dark:bg-slovenia-blue/20 text-slovenia-blue dark:text-blue-300">
                     {stop.tag}
                   </span>
                 </div>
-                <p className="text-sm font-medium text-slate-700">{stop.title}</p>
-                <p className="text-xs text-slate-500 leading-relaxed">{stop.description}</p>
+                <p className="text-sm font-medium text-slate-700 dark:text-slate-200">{stop.title}</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">{stop.description}</p>
               </div>
             </div>
           ))}

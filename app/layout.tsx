@@ -46,16 +46,24 @@ export const metadata: Metadata = {
   },
 };
 
+import { ThemeProvider } from "@/components/ThemeProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${universa.variable} ${plusJakartaSans.variable}`}>
-      <body className="min-h-screen bg-slovenia-canvas text-slate-900 font-sans flex flex-col selection:bg-slovenia-blue/10 selection:text-slovenia-blue">
-        {children}
-        <Toaster richColors position="top-right" />
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${universa.variable} ${plusJakartaSans.variable}`}
+    >
+      <body className="min-h-screen bg-slovenia-canvas dark:bg-[#0b111e] text-slate-900 dark:text-slate-100 font-sans flex flex-col selection:bg-slovenia-blue/20 selection:text-slovenia-blue">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+          <Toaster richColors position="top-right" />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -31,12 +31,12 @@ export default async function AdminUsersPage() {
 
   return (
     <div className="space-y-8 animate-fade-in">
-      <div className="border-b border-slate-200 pb-5">
-        <h1 className="font-universa text-3xl font-normal text-slate-900 tracking-[0.06em] uppercase flex items-center gap-3">
-          <Users className="w-8 h-8 text-slovenia-blue" />
+      <div className="border-b border-slate-200 dark:border-slate-800 pb-5">
+        <h1 className="font-universa text-3xl font-normal text-slate-900 dark:text-white tracking-[0.06em] uppercase flex items-center gap-3">
+          <Users className="w-8 h-8 text-slovenia-blue dark:text-blue-400" />
           Admin Users Management
         </h1>
-        <p className="text-sm text-slate-500 mt-1">
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
           Manage who can log into the /admin dashboard via Google OAuth to create and edit travel stories.
         </p>
       </div>
