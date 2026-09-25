@@ -12,6 +12,8 @@ const config: Config = {
         slovenia: {
           blue: {
             DEFAULT: "#005DA4",
+            dark: "#003A66",
+            light: "#B3D7F1",
             50: "#F0F7FC",
             100: "#D9ECF8",
             200: "#B3D7F1",

@@ -177,28 +177,32 @@ export default async function AdminDashboardPage() {
 
         {/* Quick Tips & Short cuts */}
         <div className="space-y-6">
-          <div className="bg-gradient-to-br from-slovenia-blue-dark to-slovenia-blue text-white rounded-2xl p-6 shadow-sm relative overflow-hidden">
+          <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-slovenia-blue-900 text-white rounded-2xl p-6 shadow-sm border border-slate-800 relative overflow-hidden">
+            {/* Top subtle tricolor accent */}
+            <div className="absolute top-0 left-0 right-0 h-1 slovenia-accent-bar" />
             <div className="absolute top-0 right-0 transform translate-x-4 -translate-y-4 opacity-10">
               <BookOpen className="w-36 h-36" />
             </div>
-            <h3 className="font-universa text-lg font-normal tracking-[0.06em] uppercase">Documenting Slovenia</h3>
-            <p className="text-xs text-blue-100 mt-2 leading-relaxed">
-              Every story you publish is instantly live on <strong>slovlog.com</strong> with rich imagery, location filters, and reading progress.
+            <h3 className="font-universa text-lg font-normal tracking-[0.06em] uppercase text-white mt-1">
+              Documenting Slovenia
+            </h3>
+            <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+              Every story you publish is instantly live on <strong className="text-white">slovlog.com</strong> with rich imagery, location filters, and reading progress.
             </p>
-            <div className="mt-5 pt-4 border-t border-blue-400/30 flex flex-col gap-2">
+            <div className="mt-5 pt-4 border-t border-slate-800 flex flex-col gap-2">
               <Link
                 href="/admin/media"
-                className="text-xs text-blue-100 hover:text-white flex items-center justify-between py-1 font-medium"
+                className="text-xs text-slate-300 hover:text-white flex items-center justify-between py-1.5 font-medium transition-colors"
               >
                 <span>Upload Travel Photography</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5 text-slovenia-blue-light" />
               </Link>
               <Link
                 href="/admin/users"
-                className="text-xs text-blue-100 hover:text-white flex items-center justify-between py-1 font-medium"
+                className="text-xs text-slate-300 hover:text-white flex items-center justify-between py-1.5 font-medium transition-colors"
               >
                 <span>Manage Collaborator Admins</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5 text-slovenia-blue-light" />
               </Link>
             </div>
           </div>
