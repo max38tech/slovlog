@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { updateSession } from "@/lib/supabase/middleware";
+import { verifySessionToken } from "@/lib/auth-token";
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -8,7 +8,6 @@ export async function middleware(request: NextRequest) {
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
-    pathname.startsWith("/auth") ||
     pathname.startsWith("/brand") ||
     pathname.startsWith("/fonts") ||
     pathname === "/favicon.ico" ||
@@ -22,29 +21,30 @@ export async function middleware(request: NextRequest) {
   try {
     // Handle /admin route protection
     if (pathname.startsWith("/admin")) {
-      const { supabaseResponse, user } = await updateSession(request);
+      const sessionCookie = request.cookies.get("slog_session")?.value;
+      const sessionUser = sessionCookie
+        ? await verifySessionToken(sessionCookie)
+        : null;
 
       // If attempting to access /admin/login while already logged in, redirect to /admin
       if (pathname === "/admin/login") {
-        if (user) {
+        if (sessionUser) {
           return NextResponse.redirect(new URL("/admin", request.url));
         }
-        return supabaseResponse;
+        return NextResponse.next();
       }
 
       // For any other /admin routes, require an authenticated session
-      if (!user) {
+      if (!sessionUser) {
         const loginUrl = new URL("/admin/login", request.url);
         loginUrl.searchParams.set("next", pathname);
         return NextResponse.redirect(loginUrl);
       }
 
-      return supabaseResponse;
+      return NextResponse.next();
     }
 
-    // Public blog routes pass through with refreshed sessions if present
-    const { supabaseResponse } = await updateSession(request);
-    return supabaseResponse;
+    return NextResponse.next();
   } catch (error) {
     console.error("Middleware caught unhandled error safely:", error);
     return NextResponse.next();

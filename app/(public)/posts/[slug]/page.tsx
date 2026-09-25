@@ -2,8 +2,8 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { createClient, createAdminClient } from "@/lib/supabase/server";
-import { verifyAdminUser } from "@/lib/auth";
+import { createAdminClient } from "@/lib/supabase/server";
+import { getSessionUser } from "@/lib/auth";
 import { isPostVisibleToUser, calculateReadingTime } from "@/lib/utils/public-posts";
 import { MarkdownRenderer } from "@/components/public/MarkdownRenderer";
 import { PostGallery } from "@/components/public/PostGallery";
@@ -45,10 +45,8 @@ export default async function PostPage({ params }: PostPageProps) {
   const supabase = createAdminClient();
 
   // Check if current user is an admin (to allow previewing drafts)
-  const userSupabase = await createClient();
-  const { data: { user } } = await userSupabase.auth.getUser();
-  const adminCheck = user?.email ? await verifyAdminUser(user.email) : { authorized: false };
-  const isAdmin = adminCheck.authorized;
+  const sessionUser = await getSessionUser();
+  const isAdmin = Boolean(sessionUser);
 
   // Query post by slug
   let post: any = null;

@@ -82,42 +82,48 @@ A modern, responsive travel journal built to document a journey across the green
 3. Open [`supabase/migrations/20260924_init.sql`](./supabase/migrations/20260924_init.sql) from this repository, paste the entire SQL content, and click **Run**.
    * *This creates the `slog_admin_users`, `slog_posts`, and `slog_media` tables (with `slog_` prefix for shared database isolation), enables RLS, creates the `slog-media` storage bucket, and pre-seeds Shawn Shiobara as owner with initial sample stories.*
 
-### Step 2: Configure Google OAuth
+### Step 2: Configure Dedicated Google OAuth (Direct Next.js Auth)
+
+Because this app shares a Supabase database with WeatherTrack, slovlog uses **Direct Google OAuth** handled in Next.js, completely isolating its authentication and branding from WeatherTrack.
 
 1. Go to the [Google Cloud Console](https://console.cloud.google.com/) -> **APIs & Services** -> **Credentials**.
 2. Create an **OAuth 2.0 Client ID** (Application type: *Web application*).
-3. Under **Authorized redirect URIs**, add your Supabase project callback:
+3. Under **Authorized JavaScript origins**, add:
+   ```text
+   https://slovlog.com
+   https://slovlog.vercel.app
+   http://localhost:3000
    ```
-   https://<your-supabase-project-id>.supabase.co/auth/v1/callback
+4. Under **Authorized redirect URIs**, add the direct Next.js auth callback:
+   ```text
+   https://slovlog.com/api/auth/google/callback
+   https://slovlog.vercel.app/api/auth/google/callback
+   http://localhost:3000/api/auth/google/callback
    ```
-4. Copy your **Client ID** and **Client Secret**.
-5. In your Supabase Dashboard, navigate to **Authentication** -> **Providers** -> **Google**:
-   * Enable Google.
-   * Paste your **Client ID** and **Client Secret**.
-   * Click **Save**.
-6. Under **Authentication** -> **URL Configuration**:
-   * Set **Site URL** to: `https://slovlog.com` (or `http://localhost:3000` during local testing).
-   * In **Redirect URLs**, add:
-     ```
-     https://slovlog.com/auth/callback
-     http://localhost:3000/auth/callback
-     ```
+5. Copy your **Client ID** and **Client Secret**.
 
 ### Step 3: Deploy to Vercel
 
 1. Push this repository to GitHub (`max38tech/slovlog`).
-2. Log into [Vercel](https://vercel.com/) and click **Add New...** -> **Project**.
-3. Import `max38tech/slovlog`.
-4. In **Environment Variables**, add:
+2. In your [Vercel Project](https://vercel.com/) -> **Settings** -> **Environment Variables**, add:
    ```env
-   NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+   # Shared Supabase Database & Storage
+   NEXT_PUBLIC_SUPABASE_URL=https://<your-project-id>.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=<your-supabase-anon-key>
+   SUPABASE_SERVICE_ROLE_KEY=<your-supabase-service-role-key>
+
+   # Site URL
    NEXT_PUBLIC_SITE_URL=https://slovlog.com
-   SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
+
+   # Direct Google OAuth (Isolated from WeatherTrack)
+   GOOGLE_CLIENT_ID=<your-google-oauth-client-id>
+   GOOGLE_CLIENT_SECRET=<your-google-oauth-client-secret>
+
+   # Owner Protection
    INITIAL_ADMIN_EMAIL=shawn.shiobara@gmail.com
    ```
-5. Click **Deploy**.
-6. In Vercel Project Settings -> **Domains**, add `slovlog.com` and configure the DNS CNAME / A records as prompted.
+3. Redeploy the project.
+4. You can now log into `https://slovlog.com/admin` directly with your Google account!
 
 ---
 

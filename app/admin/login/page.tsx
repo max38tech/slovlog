@@ -4,7 +4,6 @@ import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, Suspense } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { ShieldAlert, ArrowLeft, Loader2 } from "lucide-react";
 
 function LoginForm() {
@@ -14,28 +13,9 @@ function LoginForm() {
   const next = searchParams.get("next") || "/admin";
   const [loading, setLoading] = useState(false);
 
-  const handleGoogleLogin = async () => {
+  const handleGoogleLogin = () => {
     setLoading(true);
-    const supabase = createClient();
-    const siteUrl = window.location.origin;
-    const redirectTo = `${siteUrl}/auth/callback?next=${encodeURIComponent(next)}`;
-
-    const { error: signInError } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo,
-        queryParams: {
-          access_type: "offline",
-          prompt: "consent",
-        },
-      },
-    });
-
-    if (signInError) {
-      console.error("Login error:", signInError);
-      alert("Failed to initiate Google login: " + signInError.message);
-      setLoading(false);
-    }
+    window.location.href = `/api/auth/google/login?next=${encodeURIComponent(next)}`;
   };
 
   return (
@@ -83,10 +63,17 @@ function LoginForm() {
         </div>
       )}
 
-      {error === "auth_failed" && (
+      {error === "missing_credentials" && (
         <div className="mb-6 p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-800 flex gap-2 items-center">
           <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0" />
-          Authentication failed. Please check your network and try again.
+          Google OAuth credentials (GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET) are missing from your environment.
+        </div>
+      )}
+
+      {(error === "auth_failed" || error === "state_mismatch") && (
+        <div className="mb-6 p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-800 flex gap-2 items-center">
+          <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0" />
+          Authentication failed or expired. Please try signing in again.
         </div>
       )}
 

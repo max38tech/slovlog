@@ -1,21 +1,15 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createClient, createAdminClient } from "@/lib/supabase/server";
-import { verifyAdminUser } from "@/lib/auth";
+import { createAdminClient } from "@/lib/supabase/server";
+import { getSessionUser } from "@/lib/auth";
 import { canDeleteAdmin, validateAdminEmail } from "@/lib/utils/admin-protection";
 
 async function requireAdmin() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getSessionUser();
 
   if (!user || !user.email) {
     throw new Error("Unauthorized: Please sign in");
-  }
-
-  const check = await verifyAdminUser(user.email);
-  if (!check.authorized) {
-    throw new Error("Forbidden: Not an authorized administrator");
   }
 
   return user;

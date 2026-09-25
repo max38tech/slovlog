@@ -24,8 +24,11 @@ export function AdminSidebar({ userEmail, role }: AdminSidebarProps) {
   const router = useRouter();
 
   const handleSignOut = async () => {
-    const supabase = createClient();
-    await supabase.auth.signOut();
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } catch {
+      // Continue to login page
+    }
     router.push("/admin/login");
     router.refresh();
   };
