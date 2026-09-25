@@ -66,7 +66,7 @@ export function MediaUploader() {
     <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <div>
-          <h2 className="font-universa text-lg font-bold text-slate-900 flex items-center gap-2">
+          <h2 className="font-universa text-lg font-normal text-slate-900 tracking-[0.06em] uppercase flex items-center gap-2">
             <UploadCloud className="w-5 h-5 text-slovenia-blue" />
             Upload Travel Photos
           </h2>

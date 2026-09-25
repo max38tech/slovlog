@@ -8,7 +8,7 @@ interface MarkdownRendererProps {
 
 export function MarkdownRenderer({ content }: MarkdownRendererProps) {
   return (
-    <div className="prose prose-slate lg:prose-lg max-w-none prose-headings:font-universa prose-headings:text-slate-900 prose-headings:tracking-tight prose-a:text-slovenia-blue prose-a:font-medium hover:prose-a:underline prose-img:rounded-2xl prose-img:shadow-md prose-blockquote:border-l-4 prose-blockquote:border-slovenia-blue prose-blockquote:bg-slovenia-blue/5 prose-blockquote:py-2 prose-blockquote:px-5 prose-blockquote:rounded-r-xl prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-slate-700">
+    <div className="prose prose-slate lg:prose-lg max-w-none prose-headings:font-sans prose-headings:font-bold prose-headings:text-slate-900 prose-headings:tracking-tight prose-a:text-slovenia-blue prose-a:font-medium hover:prose-a:underline prose-img:rounded-2xl prose-img:shadow-md prose-blockquote:border-l-4 prose-blockquote:border-slovenia-blue prose-blockquote:bg-slovenia-blue/5 prose-blockquote:py-2 prose-blockquote:px-5 prose-blockquote:rounded-r-xl prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-slate-700">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{

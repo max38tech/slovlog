@@ -62,7 +62,7 @@ export default async function AdminDashboardPage() {
       {/* Top Welcome Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="font-universa text-3xl font-bold text-slate-900 tracking-tight">
+          <h1 className="font-universa text-3xl font-normal text-slate-900 tracking-[0.06em] uppercase">
             Dashboard Overview
           </h1>
           <p className="text-sm text-slate-500 mt-1">
@@ -93,7 +93,7 @@ export default async function AdminDashboardPage() {
                 <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">
                   {stat.label}
                 </p>
-                <p className="font-universa text-3xl font-bold text-slate-900 mt-1">
+                <p className="font-sans text-3xl font-bold text-slate-900 mt-1">
                   {stat.value}
                 </p>
               </div>
@@ -110,7 +110,7 @@ export default async function AdminDashboardPage() {
         {/* Recent Posts Table */}
         <div className="lg:col-span-2 bg-white border border-slate-200/80 rounded-2xl shadow-sm p-6">
           <div className="flex items-center justify-between mb-5">
-            <h2 className="font-universa text-lg font-bold text-slate-900">
+            <h2 className="font-universa text-lg font-normal text-slate-900 tracking-[0.06em] uppercase">
               Recent Travel Stories
             </h2>
             <Link
@@ -181,7 +181,7 @@ export default async function AdminDashboardPage() {
             <div className="absolute top-0 right-0 transform translate-x-4 -translate-y-4 opacity-10">
               <BookOpen className="w-36 h-36" />
             </div>
-            <h3 className="font-universa text-lg font-bold">Documenting Slovenia</h3>
+            <h3 className="font-universa text-lg font-normal tracking-[0.06em] uppercase">Documenting Slovenia</h3>
             <p className="text-xs text-blue-100 mt-2 leading-relaxed">
               Every story you publish is instantly live on <strong>slovlog.com</strong> with rich imagery, location filters, and reading progress.
             </p>

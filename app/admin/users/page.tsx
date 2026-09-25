@@ -32,7 +32,7 @@ export default async function AdminUsersPage() {
   return (
     <div className="space-y-8 animate-fade-in">
       <div className="border-b border-slate-200 pb-5">
-        <h1 className="font-universa text-3xl font-bold text-slate-900 tracking-tight flex items-center gap-3">
+        <h1 className="font-universa text-3xl font-normal text-slate-900 tracking-[0.06em] uppercase flex items-center gap-3">
           <Users className="w-8 h-8 text-slovenia-blue" />
           Admin Users Management
         </h1>

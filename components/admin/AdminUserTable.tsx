@@ -64,7 +64,7 @@ export function AdminUserTable({ users }: { users: AdminUserItem[] }) {
     <div className="space-y-6">
       {/* Add Admin Form */}
       <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-        <h2 className="font-universa text-lg font-bold text-slate-900 flex items-center gap-2 mb-1">
+        <h2 className="font-universa text-lg font-normal text-slate-900 tracking-[0.06em] uppercase flex items-center gap-2 mb-1">
           <UserPlus className="w-5 h-5 text-slovenia-blue" />
           Authorize New Administrator
         </h2>
@@ -103,7 +103,7 @@ export function AdminUserTable({ users }: { users: AdminUserItem[] }) {
       {/* Admins Table */}
       <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
         <div className="p-5 border-b border-slate-200 flex items-center justify-between">
-          <h3 className="font-universa text-lg font-bold text-slate-900">
+          <h3 className="font-universa text-lg font-normal text-slate-900 tracking-[0.06em] uppercase">
             Active Administrators ({users.length})
           </h3>
         </div>

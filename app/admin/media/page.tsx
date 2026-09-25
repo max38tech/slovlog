@@ -18,7 +18,7 @@ export default async function AdminMediaPage() {
     <div className="space-y-8 animate-fade-in">
       {/* Page Header */}
       <div className="border-b border-slate-200 pb-5">
-        <h1 className="font-universa text-3xl font-bold text-slate-900 tracking-tight flex items-center gap-3">
+        <h1 className="font-universa text-3xl font-normal text-slate-900 tracking-[0.06em] uppercase flex items-center gap-3">
           <ImageIcon className="w-8 h-8 text-slovenia-blue" />
           Media Library
         </h1>
@@ -33,7 +33,7 @@ export default async function AdminMediaPage() {
       {/* Media Grid */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="font-universa text-lg font-bold text-slate-900">
+          <h2 className="font-universa text-lg font-normal text-slate-900 tracking-[0.06em] uppercase">
             Uploaded Photos ({items.length})
           </h2>
         </div>

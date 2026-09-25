@@ -22,7 +22,7 @@ export function Header() {
             />
           </div>
           <div className="flex flex-col">
-            <span className="font-universa text-2xl font-bold tracking-tight text-slovenia-blue group-hover:text-slovenia-blue-dark transition-colors leading-none">
+            <span className="font-universa text-2xl font-normal tracking-[0.08em] text-slovenia-blue group-hover:text-slovenia-blue-dark transition-colors leading-none uppercase">
               slovlog
             </span>
             <span className="text-[10px] text-slate-400 font-medium tracking-wider uppercase mt-0.5">

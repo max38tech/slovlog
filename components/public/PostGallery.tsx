@@ -14,7 +14,7 @@ export function PostGallery({ images }: { images: string[] }) {
     <section className="mt-12 pt-10 border-t border-slate-200">
       <div className="flex items-center gap-2 mb-6">
         <Images className="w-5 h-5 text-slovenia-green-leaf" />
-        <h3 className="font-universa text-2xl font-bold text-slate-900">
+        <h3 className="font-universa text-xl font-normal text-slate-900 tracking-[0.06em] uppercase">
           Photo Gallery ({images.length})
         </h3>
       </div>

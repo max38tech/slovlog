@@ -33,7 +33,7 @@ export function PostCard({ post }: PostCardProps) {
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slovenia-blue/10 to-slovenia-green/10 text-slovenia-blue">
-            <span className="font-universa text-2xl font-bold opacity-30">slovlog</span>
+            <span className="font-universa text-2xl font-normal tracking-[0.08em] opacity-30 uppercase">slovlog</span>
           </div>
         )}
 
@@ -63,7 +63,7 @@ export function PostCard({ post }: PostCardProps) {
           </div>
 
           {/* Title */}
-          <h3 className="font-universa text-xl font-bold text-slate-900 group-hover:text-slovenia-blue transition-colors line-clamp-2 leading-snug">
+          <h3 className="font-sans text-lg sm:text-xl font-bold text-slate-900 group-hover:text-slovenia-blue transition-colors line-clamp-2 leading-snug">
             <Link href={`/posts/${post.slug}`}>
               {post.title}
             </Link>

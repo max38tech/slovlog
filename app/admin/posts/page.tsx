@@ -20,7 +20,7 @@ export default async function AdminPostsPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-200 pb-5">
         <div>
-          <h1 className="font-universa text-3xl font-bold text-slate-900 tracking-tight">
+          <h1 className="font-universa text-3xl font-normal text-slate-900 tracking-[0.06em] uppercase">
             Travel Stories
           </h1>
           <p className="text-sm text-slate-500 mt-1">

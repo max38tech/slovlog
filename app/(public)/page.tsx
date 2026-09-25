@@ -96,7 +96,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
                 priority
               />
             </div>
-            <h1 className="font-universa text-4xl sm:text-6xl font-bold text-slate-900 tracking-tight max-w-3xl">
+            <h1 className="font-universa text-4xl sm:text-6xl font-normal text-slate-900 tracking-[0.06em] max-w-3xl uppercase leading-tight">
               Travels Across Slovenia
             </h1>
           </div>
@@ -132,7 +132,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
       {/* Destination Filter Bar */}
       <section id="destinations" className="max-w-6xl mx-auto px-4 sm:px-6 scroll-mt-24">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-universa text-xl font-bold text-slate-900 flex items-center gap-2">
+          <h2 className="font-universa text-lg font-normal text-slate-900 tracking-[0.06em] flex items-center gap-2 uppercase">
             <MapPin className="w-5 h-5 text-slovenia-green-leaf" />
             Explore by Destination
           </h2>
@@ -204,7 +204,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
                   </span>
                 </div>
 
-                <h2 className="font-universa text-2xl lg:text-3xl font-bold text-slate-900 group-hover:text-slovenia-blue transition-colors leading-tight">
+                <h2 className="font-sans text-2xl lg:text-3xl font-bold text-slate-900 group-hover:text-slovenia-blue transition-colors leading-tight">
                   <Link href={`/posts/${featuredPost.slug}`}>
                     {featuredPost.title}
                   </Link>
@@ -238,7 +238,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         {/* Stories Grid */}
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="font-universa text-2xl font-bold text-slate-900">
+            <h2 className="font-universa text-xl font-normal text-slate-900 tracking-[0.06em] uppercase">
               {destination ? `Stories from ${destination}` : "All Travel Stories"}
             </h2>
             <span className="text-xs text-slate-400">

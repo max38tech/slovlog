@@ -8,6 +8,7 @@ const universa = localFont({
   src: "../public/fonts/universa.otf",
   variable: "--font-universa",
   display: "swap",
+  weight: "400",
   fallback: ["system-ui", "sans-serif"],
 });
 

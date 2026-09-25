@@ -194,7 +194,7 @@ export function PostEditor({ post }: PostEditorProps) {
             <ArrowLeft className="w-5 h-5" />
           </Link>
           <div>
-            <h1 className="font-universa text-2xl font-bold text-slate-900">
+            <h1 className="font-universa text-2xl font-normal text-slate-900 tracking-[0.06em] uppercase">
               {isEditing ? "Edit Travel Story" : "Write New Travel Story"}
             </h1>
             <p className="text-xs text-slate-500">
@@ -527,7 +527,7 @@ export function PostEditor({ post }: PostEditorProps) {
                 viewMode === "preview" ? "col-span-2" : ""
               }`}
             >
-              <div className="prose prose-slate max-w-none prose-headings:font-universa prose-headings:text-slate-900 prose-a:text-slovenia-blue">
+              <div className="prose prose-slate max-w-none prose-headings:font-sans prose-headings:font-bold prose-headings:text-slate-900 prose-a:text-slovenia-blue">
                 {content.trim() ? (
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>
                     {content}
@@ -545,7 +545,7 @@ export function PostEditor({ post }: PostEditorProps) {
 
       {/* Photo Gallery Manager */}
       <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
-        <h3 className="font-universa text-lg font-bold text-slate-900 flex items-center gap-2">
+        <h3 className="font-universa text-lg font-normal text-slate-900 tracking-[0.06em] uppercase flex items-center gap-2">
           <ImageIcon className="w-5 h-5 text-slovenia-green-leaf" />
           Photo Gallery Attachments
         </h3>

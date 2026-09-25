@@ -54,7 +54,7 @@ function LoginForm() {
             priority
           />
         </div>
-        <h1 className="font-universa text-3xl font-bold text-slate-900 tracking-tight">
+        <h1 className="font-universa text-3xl font-normal text-slate-900 tracking-[0.08em] uppercase">
           slovlog CMS
         </h1>
         <p className="text-sm text-slate-500 mt-1">

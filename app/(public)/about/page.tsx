@@ -65,7 +65,7 @@ export default function AboutPage() {
           <Compass className="w-3.5 h-3.5 text-slovenia-green-leaf" />
           The Itinerary & Story
         </div>
-        <h1 className="font-universa text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight">
+        <h1 className="font-universa text-4xl sm:text-5xl font-normal text-slate-900 tracking-[0.06em] uppercase">
           About slovlog
         </h1>
         <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-sans">
@@ -85,7 +85,7 @@ export default function AboutPage() {
           />
         </div>
         <div className="space-y-2 text-center sm:text-left">
-          <h3 className="font-universa text-xl font-bold text-slate-900">
+          <h3 className="font-universa text-lg font-normal text-slate-900 tracking-[0.06em] uppercase">
             Why the Dragon?
           </h3>
           <p className="text-xs text-slate-600 leading-relaxed">
@@ -98,7 +98,7 @@ export default function AboutPage() {
       <div className="space-y-6">
         <div className="flex items-center gap-2">
           <Navigation className="w-5 h-5 text-slovenia-blue" />
-          <h2 className="font-universa text-2xl font-bold text-slate-900">
+          <h2 className="font-universa text-xl font-normal text-slate-900 tracking-[0.06em] uppercase">
             Our Travel Route
           </h2>
         </div>
@@ -110,7 +110,7 @@ export default function AboutPage() {
               className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs hover:border-slovenia-blue/40 transition-colors flex flex-col sm:flex-row gap-5"
             >
               <div className="flex items-center sm:items-start gap-3 shrink-0">
-                <span className="font-universa text-2xl font-black text-slovenia-blue/30 sm:w-10">
+                <span className="font-universa text-2xl font-normal tracking-[0.06em] text-slovenia-blue/30 sm:w-10">
                   {stop.stop}
                 </span>
                 <span className="inline-block text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slovenia-blue/10 text-slovenia-blue sm:hidden">
@@ -120,7 +120,7 @@ export default function AboutPage() {
 
               <div className="space-y-1.5 flex-1">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-universa text-lg font-bold text-slate-900">
+                  <h3 className="font-sans text-lg font-bold text-slate-900">
                     {stop.destination}
                   </h3>
                   <span className="hidden sm:inline-block text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slovenia-blue/10 text-slovenia-blue">
@@ -138,7 +138,7 @@ export default function AboutPage() {
       {/* Slovenia Travel Tips */}
       <div className="bg-slate-900 text-white rounded-3xl p-8 space-y-4 relative overflow-hidden">
         <div className="absolute top-0 right-0 h-1.5 slovenia-accent-bar w-full" />
-        <h3 className="font-universa text-xl font-bold flex items-center gap-2">
+        <h3 className="font-universa text-lg font-normal tracking-[0.06em] uppercase flex items-center gap-2">
           <Sparkles className="w-5 h-5 text-slovenia-green-leaf" />
           Slovenia Travel Takeaways
         </h3>

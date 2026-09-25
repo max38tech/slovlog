@@ -14,6 +14,15 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Universa is a geometric display all-caps typeface.
+   Disable faux-bold font-synthesis to prevent glyph outlines from bleeding together,
+   and provide comfortable tracking by default. */
+.font-universa {
+  font-synthesis: none;
+  -webkit-font-synthesis: none;
+  letter-spacing: 0.06em;
+}
+
 /* Slovenian Tricolor subtle accent bar */
 .slovenia-tricolor {
   background: linear-gradient(

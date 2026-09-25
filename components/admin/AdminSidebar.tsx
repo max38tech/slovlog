@@ -52,8 +52,8 @@ export function AdminSidebar({ userEmail, role }: AdminSidebarProps) {
             />
           </div>
           <div>
-            <div className="font-universa text-xl font-bold tracking-tight text-white flex items-center gap-1.5">
-              slovlog <span className="text-xs px-1.5 py-0.5 rounded bg-slovenia-blue/30 text-slovenia-blue-light font-mono font-normal">CMS</span>
+            <div className="font-universa text-xl font-normal tracking-[0.08em] text-white flex items-center gap-1.5 uppercase">
+              slovlog <span className="text-xs px-1.5 py-0.5 rounded bg-slovenia-blue/30 text-slovenia-blue-light font-mono font-normal lowercase tracking-normal">CMS</span>
             </div>
             <div className="text-[11px] text-slate-400">Slovenia Travel Journal</div>
           </div>

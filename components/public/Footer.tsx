@@ -32,7 +32,7 @@ export function Footer() {
                 />
               </div>
               <div>
-                <span className="font-universa text-2xl font-bold tracking-tight text-white">
+                <span className="font-universa text-2xl font-normal tracking-[0.08em] text-white uppercase">
                   slovlog
                 </span>
                 <p className="text-xs text-slate-400">Slovenia Travel Journal</p>
@@ -51,7 +51,7 @@ export function Footer() {
 
           {/* Col 2: Destinations */}
           <div>
-            <h4 className="font-universa text-sm font-bold text-white uppercase tracking-wider mb-3">
+            <h4 className="font-sans text-xs font-bold text-white uppercase tracking-wider mb-3">
               Destinations
             </h4>
             <ul className="space-y-2 text-xs">
@@ -71,7 +71,7 @@ export function Footer() {
 
           {/* Col 3: Navigation */}
           <div>
-            <h4 className="font-universa text-sm font-bold text-white uppercase tracking-wider mb-3">
+            <h4 className="font-sans text-xs font-bold text-white uppercase tracking-wider mb-3">
               Navigation
             </h4>
             <ul className="space-y-2 text-xs">

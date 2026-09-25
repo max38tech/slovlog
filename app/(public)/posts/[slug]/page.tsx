@@ -123,7 +123,7 @@ export default async function PostPage({ params }: PostPageProps) {
         </div>
 
         {/* Title */}
-        <h1 className="font-universa text-3xl sm:text-5xl font-bold text-slate-900 tracking-tight leading-tight">
+        <h1 className="font-sans text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
           {post.title}
         </h1>
 
@@ -188,7 +188,7 @@ export default async function PostPage({ params }: PostPageProps) {
                 <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
                 Previous Story
               </span>
-              <p className="font-universa text-base font-bold text-slate-900 group-hover:text-slovenia-blue transition-colors line-clamp-1">
+              <p className="font-sans text-base font-bold text-slate-900 group-hover:text-slovenia-blue transition-colors line-clamp-1">
                 {prevPost.title}
               </p>
               <p className="text-xs text-slate-500 mt-0.5">{prevPost.location}</p>
@@ -206,7 +206,7 @@ export default async function PostPage({ params }: PostPageProps) {
                 Next Story
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </span>
-              <p className="font-universa text-base font-bold text-slate-900 group-hover:text-slovenia-blue transition-colors line-clamp-1">
+              <p className="font-sans text-base font-bold text-slate-900 group-hover:text-slovenia-blue transition-colors line-clamp-1">
                 {nextPost.title}
               </p>
               <p className="text-xs text-slate-500 mt-0.5">{nextPost.location}</p>
